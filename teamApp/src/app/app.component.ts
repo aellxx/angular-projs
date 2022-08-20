@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'teamApp';
+  // states
+  newMember = "";
+  memberArray: string[] = [];
+
+  // functions to manipulate state
+  addNewMember = () => {
+    this.memberArray.push(this.newMember);
+  }
 }
