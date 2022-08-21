@@ -29,11 +29,10 @@
     </p>
   </div>
   <div class="teams-container" *ngIf="teams.length">
-    <div class="team-container" *ngFor="let team of teams; let idx = index">
-      <h3>Team {{idx + 1}}</h3>
-      <ul>
-        <li *ngFor="let member of team">{{member}}</li>
-      </ul>
-    </div>
+    <app-team 
+      *ngFor="let team of teams; let i=index"
+      [team]="team"
+      [idx]="i">
+    </app-team>
   </div>
 </div>
