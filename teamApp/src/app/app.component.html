@@ -6,8 +6,8 @@
     </ul>
     <div class="add-members-container">
       <input 
-        #newInput
-        (input)="onInputName(newInput.value)"
+        #inputMember
+        (input)="onInputName(inputMember.value)"
         type="text" 
         placeholder="Name" 
         [value]="newMember"
@@ -16,10 +16,10 @@
     </div>
     <div class="input-container">
       <input 
-        #numberOfTeams
+        #inputNumberOfTeams
         type="number" 
         placeholder="# of teams" 
-        (input)="onEnterNumberOfTeams(numberOfTeams.value)"
+        (input)="onEnterNumberOfTeams(inputNumberOfTeams.value)"
         [value]="numberOfTeams"
       />
       <button (click)="generateTeams()">Generate!</button>
@@ -27,5 +27,13 @@
     <p class="error-msg" *ngIf="errorMsg">
       {{errorMsg}}
     </p>
+  </div>
+  <div class="teams-container" *ngIf="teams.length">
+    <div class="team-container" *ngFor="let team of teams; let idx = index">
+      <h3>Team {{idx + 1}}</h3>
+      <ul>
+        <li *ngFor="let member of team">{{member}}</li>
+      </ul>
+    </div>
   </div>
 </div>
