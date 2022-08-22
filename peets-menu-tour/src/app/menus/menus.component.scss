@@ -1,0 +1,19 @@
+@import "_variables";
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    li {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        list-style: none;
+        button:hover, .selected-menu {
+            background-color: $buttonBg;
+            color: #fff;
+            transition: 300ms;
+            cursor: pointer;
+        }
+    }
+}
+

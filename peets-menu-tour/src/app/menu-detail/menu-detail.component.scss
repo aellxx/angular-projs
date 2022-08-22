@@ -1,0 +1,17 @@
+.description {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    .description-image {
+        img {
+            height: 35vh;
+            width: auto; 
+        }
+        display: flex;
+        justify-content: center;
+    }
+    .description-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

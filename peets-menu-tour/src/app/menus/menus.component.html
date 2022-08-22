@@ -1,0 +1,12 @@
+<h2>Menus</h2>
+<ul class="menus">
+    <li *ngFor="let menu of menus">
+        <button 
+            type="button" 
+            (click)="onSelectMenu(menu)"
+            [class.selected-menu]="menu === selectedMenu">
+            <span class="name">{{ menu.name }}</span>
+        </button>
+    </li>
+</ul>
+<app-menu-detail [menu]="selectedMenu"></app-menu-detail>

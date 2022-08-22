@@ -1,0 +1,10 @@
+<div class="description" *ngIf="menu">
+    <div class="description-image">
+        <img src="{{menu.imageId}}" alt="{{menu.name}}">
+    </div>
+    <div class="description-text">
+        <h2>{{ menu.name | uppercase }}</h2>
+        <p>{{ menu.description }}</p>
+        <span class="price">(${{ menu.price }})</span>
+    </div>
+</div>
