@@ -32,10 +32,4 @@ export class MenusComponent implements OnInit {
       .subscribe(menus => this.menus = menus);
   }
 
-  // click event handler: selects clicked menu & saves to state
-  onSelectMenu(menuItem: Menu) {
-    this.selectedMenu = menuItem;
-    this.messageService.add(`View History: viewed ${this.selectedMenu.name}`);
-  }
-
 }

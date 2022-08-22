@@ -1,0 +1,7 @@
+<h2>Top Menus</h2>
+<div class="menus-list">
+    <a *ngFor="let menu of menus"
+        href="/details/{{menu.id}}">
+        {{menu.name}}
+    </a>
+</div>

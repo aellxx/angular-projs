@@ -7,16 +7,19 @@ import { MessageService } from './message.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MenuService {
 
+  // send messageService as a private parameter
   constructor(private messageService: MessageService) { }
 
   // Service array getter
-  // return an Observable<Menu[]> object
-  // get Menus asynchronously & add signaling msg accordingly 
   getMenus(): Observable<Menu[]> {
+    // get all the menus in the form of OBservables
     const menus = of(MENUS);
-    this.messageService.add("MenuService: fetched menu data")
+    // signal: finish getting data
+    this.messageService.add("MenuService: fetched menu data");
+    // return Observable of an array of Menus
     return menus;
   } 
 
