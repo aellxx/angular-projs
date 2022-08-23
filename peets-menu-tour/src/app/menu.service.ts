@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Menu } from './menu';
 import { MENUS } from './menus';
-import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';                          // get menus data in the form of Observable objects
+import { MessageService } from './message.service';             // to log messages
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // to get data from server
+import { catchError, map, tap } from 'rxjs';                    // to handle errors
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class MenuService {
   getMenus(): Observable<Menu[]> {
     // get menus from the internal server 
     const menus = this.http.get<Menu[]>(this.menusURL);
-    console.log(menus);
+    console.log("menus: ", menus);
     // signal: finish getting data
     this.logMessage("fetched menu data");
     // return Observable of an array of Menus
@@ -37,7 +39,6 @@ export class MenuService {
   getMenu(id: string): Observable<Menu> {
     // get menu with corresponding id
     const menu = MENUS.find(menuToFind => menuToFind.id === id)!;
-    console.log(menu);
     // signal: finish getting menu
     this.logMessage(`fetched menu data with menu id: ${id}`);
     // return Observable of type Menu
