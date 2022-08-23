@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Menu } from "../menu";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -11,20 +11,29 @@ import { MenuService } from '../menu.service';
 })
 export class MenuDetailComponent implements OnInit {
 
+  menu: Menu | undefined;
+
   constructor(
-    private activatedRoute: ActivatedRoute, 
-    private location: Location,
-    private menuService: MenuService,
+    private route: ActivatedRoute, // fetching page information 
+    private location: Location, // interact with browser; for moving back to previous page
+    private menuService: MenuService, // fetching data
   ) { }
 
   ngOnInit(): void {
+    // get the menu item on initialization
     this.getMenu();
   }
-  // data passed from parent class: user @Input to declare as property 
-  @Input() menu?: Menu;
 
   getMenu(): void {
-    
+    // get id from the URL route
+    const id: string = String(this.route.snapshot.paramMap.get('id'));
+    // assign menu property with the correct menu from MENUS
+    this.menuService.getMenu(id).subscribe(menu => this.menu = menu);
+  }
+
+  // click event handler: go back to the previous page on click 
+  goBackOnClick() {
+    this.location.back();
   }
 
 }

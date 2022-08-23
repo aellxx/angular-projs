@@ -23,4 +23,15 @@ export class MenuService {
     return menus;
   } 
 
+  // Service individual menu getter
+  getMenu(id: string): Observable<Menu> {
+    // get menu with corresponding id
+    const menu = MENUS.find(menuToFind => menuToFind.id === id)!;
+    console.log(menu);
+    // signal: finish getting menu
+    this.messageService.add(`MenuService: fetched menu data with menu id: ${id}`);
+    // return Observable of type Menu
+    return of(menu);
+  }
+
 }

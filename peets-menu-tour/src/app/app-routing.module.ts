@@ -15,7 +15,7 @@ import { MenuDetailComponent } from './menu-detail/menu-detail.component';
 const routes: Routes = [
   {path: 'menus', component: MenusComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'detail/:id', component: MenuDetailComponent},
+  {path: 'details/:id', component: MenuDetailComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 ]
 

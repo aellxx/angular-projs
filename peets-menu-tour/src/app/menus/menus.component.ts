@@ -20,7 +20,7 @@ export class MenusComponent implements OnInit {
   constructor(private menuService: MenuService, public messageService: MessageService) { }
 
   ngOnInit(): void {
-    // call the getter in th
+    // call the getter of Menus
     this.getMenus();
   }
 
