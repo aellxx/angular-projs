@@ -6,4 +6,26 @@
         </a>
     </li>
 </ul>
+<div class="newMenu">
+    <!-- name -->
+    <label for="menuName">Menu: </label>
+    <input type="text" #menuName placeholder="Enter a menu you want to add" required>
+    <!-- description -->
+    <label for="menuDescription">Description: </label>
+    <textarea #menuDescription placeholder="Enter a description" required></textarea>
+    <!-- price -->
+    <label for="menuPrice">Price: </label>
+    <input type="number" #menuPrice placeholder="Enter the price" required>
+    <!-- optional photo -->
+    <label for="menuImageLink">Image Link: </label>
+    <input type="url" #menuImageLink placeholder="Enter a URL link to the menu image">
+    <!-- Button for submitting -->
+    <button
+        type="button"
+        class="addNewMenuButton"
+        (click)="addNewMenuOnClick(menuName.value, menuDescription.value, menuPrice.value, menuImageLink.value)"
+    >
+        Submit!
+    </button>
+</div>
 

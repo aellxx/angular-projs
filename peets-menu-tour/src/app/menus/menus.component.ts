@@ -31,4 +31,23 @@ export class MenusComponent implements OnInit {
       .subscribe(menus => this.menus = menus);
   }
 
+  private trimInput(userInputInfo: string): string {
+    return userInputInfo.trim()
+  }
+
+  // click event handler to submit new menu
+  addNewMenuOnClick(name: string, description: string, price: string, imageId: string) {
+    if (!name || !description || !price || !imageId) {
+      alert("Fields left blank!");
+      return; 
+    } else {
+      // generate id
+      const id = this.trimInput(name).replace(/\s+/g, '-').toLowerCase();
+      // add menu to the server database
+      this.menuService.addNewMenu({id, name, price: parseFloat(price), description, imageId} as Menu)
+        .subscribe(menu => {
+          this.menus.push(menu)
+        });
+    }
+  }
 }

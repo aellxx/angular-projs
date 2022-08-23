@@ -18,6 +18,10 @@ export class MenuService {
   //    heros: collectionName -> the database
   private menusURL = 'api/menus';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   // send messageService as a private parameter
   constructor(
     private messageService: MessageService, 
@@ -43,11 +47,9 @@ export class MenuService {
     // get menu with corresponding id
     const menu = this.http.get<Menu>(url)
       .pipe(
-        tap(_ => this.logMessage(`fetched menu data with menu id: ${id}`)),
+        tap(_ => this.logMessage(`fetched menu data with menu id: ${id}`)), // signal: finish getting menu
         catchError(this.handleError<Menu>(`getMenu() id = ${id}`))
       );
-    // signal: finish getting menu
-    this.logMessage(`fetched menu data with menu id: ${id}`);
     // return Observable of type Menu
     return menu;
   }
@@ -67,6 +69,15 @@ export class MenuService {
       // return an empty result
       return of(result as T);
     }
+  }
+
+  addNewMenu(newMenu: Menu) {
+    // make a new menu object with a POST request
+    return this.http.post<Menu>(this.menusURL, newMenu, this.httpOptions)
+      .pipe(
+        tap((menu: Menu) => this.logMessage(`added new menu "${menu.id}"`)),
+        catchError(this.handleError<Menu>('addNewMenu'))
+      );
   }
 
 }
