@@ -27,27 +27,46 @@ export class MenuService {
   // Service array getter
   getMenus(): Observable<Menu[]> {
     // get menus from the internal server 
-    const menus = this.http.get<Menu[]>(this.menusURL);
-    console.log("menus: ", menus);
-    // signal: finish getting data
-    this.logMessage("fetched menu data");
+    const menus = this.http.get<Menu[]>(this.menusURL)
+      .pipe(
+        tap(_ => this.logMessage("fetched menu data")),
+        catchError(this.handleError<Menu[]>('getMenus', []))
+      );
     // return Observable of an array of Menus
     return menus;
   } 
 
   // Service individual menu getter
-  getMenu(id: string): Observable<Menu> {
+  getMenuById(id: string): Observable<Menu> {
+    // get-by-id request supported by the API using api/database/:id => api/menus/americano
+    const url = `${this.menusURL}/${id}`;
     // get menu with corresponding id
-    const menu = MENUS.find(menuToFind => menuToFind.id === id)!;
+    const menu = this.http.get<Menu>(url)
+      .pipe(
+        tap(_ => this.logMessage(`fetched menu data with menu id: ${id}`)),
+        catchError(this.handleError<Menu>(`getMenu() id = ${id}`))
+      );
     // signal: finish getting menu
     this.logMessage(`fetched menu data with menu id: ${id}`);
     // return Observable of type Menu
-    return of(menu);
+    return menu;
   }
 
   // refractor logging message 
   logMessage(message: string): void {
     this.messageService.add(`MenuService: ${message}`);
+  }
+
+  // Error handling function 
+  private handleError<T>(operation="operation", result?: T) {
+    // return a function that returns a Observable of type T
+    return (error: any): Observable<T> => {
+      // log the error to the console and the UI
+      console.error(error);
+      this.logMessage(`${operation} operation failed: ${error.message}`);
+      // return an empty result
+      return of(result as T);
+    }
   }
 
 }

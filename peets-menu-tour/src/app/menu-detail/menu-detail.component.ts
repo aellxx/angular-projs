@@ -28,7 +28,7 @@ export class MenuDetailComponent implements OnInit {
     // get id from the URL route
     const id: string = String(this.route.snapshot.paramMap.get('id'));
     // assign menu property with the correct menu from MENUS
-    this.menuService.getMenu(id).subscribe(menu => this.menu = menu);
+    this.menuService.getMenuById(id).subscribe(menu => this.menu = menu);
   }
 
   // click event handler: go back to the previous page on click 
