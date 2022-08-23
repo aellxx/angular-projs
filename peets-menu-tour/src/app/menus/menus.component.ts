@@ -14,7 +14,6 @@ export class MenusComponent implements OnInit {
 
   // states
   menus: Menu[] = [];
-  selectedMenu?: Menu; 
 
   // add private parameter menuService to get the service
   constructor(private menuService: MenuService, public messageService: MessageService) { }
