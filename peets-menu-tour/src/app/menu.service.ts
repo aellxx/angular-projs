@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Menu } from './menu';
-import { MENUS } from './menus';
-import { Observable, of } from 'rxjs';                          // get menus data in the form of Observable objects
+import { Observable, of, catchError, tap } from 'rxjs';    // RxJS for data management 
 import { MessageService } from './message.service';             // to log messages
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // to get data from server
-import { catchError, map, tap } from 'rxjs';                    // to handle errors
 
 
 @Injectable({
@@ -30,7 +28,7 @@ export class MenuService {
 
   // Service array getter
   getMenus(): Observable<Menu[]> {
-    // get menus from the internal server 
+    // get menus from the internal server: the .get() method returns an Observable object
     const menus = this.http.get<Menu[]>(this.menusURL)
       .pipe(
         tap(_ => this.logMessage("fetched menu data")),
@@ -73,11 +71,19 @@ export class MenuService {
 
   addNewMenu(newMenu: Menu) {
     // make a new menu object with a POST request
-    return this.http.post<Menu>(this.menusURL, newMenu, this.httpOptions)
-      .pipe(
+    return this.http.post<Menu>(this.menusURL, newMenu, this.httpOptions).pipe(
         tap((menu: Menu) => this.logMessage(`added new menu "${menu.id}"`)),
         catchError(this.handleError<Menu>('addNewMenu'))
       );
+  }
+
+  deleteMenu(deleteId: string) {
+    const urlToDelete = `${this.menusURL}/${deleteId}`;
+
+    return this.http.delete<Menu>(urlToDelete, this.httpOptions).pipe(
+      tap(_ => this.logMessage(`deleted Menu with id ${deleteId}`)), 
+      catchError(this.handleError<Menu>("delteMenu")),
+    );
   }
 
 }

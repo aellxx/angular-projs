@@ -28,7 +28,7 @@ export class MenusComponent implements OnInit {
   getMenus(): void {
     // asynchronously assign menus from service to this.menus
     this.menuService.getMenus()
-      .subscribe(menus => this.menus = menus);
+      .subscribe(menus => this.menus = menus); // get the data from the observable and the pipe
   }
 
   private trimInput(userInputInfo: string): string {
@@ -45,9 +45,15 @@ export class MenusComponent implements OnInit {
       const id = this.trimInput(name).replace(/\s+/g, '-').toLowerCase();
       // add menu to the server database
       this.menuService.addNewMenu({id, name, price: parseFloat(price), description, imageId} as Menu)
-        .subscribe(menu => {
-          this.menus.push(menu)
-        });
+        .subscribe(menu => {this.menus.push(menu)}); // get the data from the observable and the pipe
     }
+  }
+
+  // click event handler to delete a menu 
+  deleteMenuOnClick(menuId: string) {
+    // filter out for this.menu
+    this.menus = this.menus.filter((menu) => menu.id !== menuId);
+    // delete on the server and get the data
+    return this.menuService.deleteMenu(menuId).subscribe();
   }
 }

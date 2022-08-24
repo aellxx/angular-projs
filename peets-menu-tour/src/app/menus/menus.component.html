@@ -4,6 +4,12 @@
         <a routerLink="/details/{{menu.id}}">
             {{ menu.name }}
         </a>
+        <button type="button"
+         (click)="deleteMenuOnClick(menu.id)"
+         class="delete"
+         title="delete hero">
+            X
+        </button>
     </li>
 </ul>
 <div class="newMenu">
