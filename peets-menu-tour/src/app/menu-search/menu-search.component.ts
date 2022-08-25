@@ -16,11 +16,12 @@ export class MenuSearchComponent implements OnInit {
   
   // $ shows that searchedMenus is an ARRAY of Observables
   searchedMenus$!: Observable<Menu[]>;
-  private searchTerms = new Subject<string>;
+  private searchTerms = new Subject<string>();
 
   constructor(private menuService: MenuService) { }
 
   searchOnInput(term: string): void{
+    // Subjects are both Observables AND Observers
     this.searchTerms.next(term);
   }
 
@@ -33,6 +34,5 @@ export class MenuSearchComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.menuService.searchMenu(term)),
     )
-    
   }
 }
