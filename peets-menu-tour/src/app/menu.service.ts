@@ -69,6 +69,7 @@ export class MenuService {
     }
   }
 
+  // add a menu to the server
   addNewMenu(newMenu: Menu) {
     // make a new menu object with a POST request
     return this.http.post<Menu>(this.menusURL, newMenu, this.httpOptions).pipe(
@@ -77,13 +78,29 @@ export class MenuService {
       );
   }
 
+  // delete a menu on the server
   deleteMenu(deleteId: string) {
     const urlToDelete = `${this.menusURL}/${deleteId}`;
 
     return this.http.delete<Menu>(urlToDelete, this.httpOptions).pipe(
       tap(_ => this.logMessage(`deleted Menu with id ${deleteId}`)), 
-      catchError(this.handleError<Menu>("delteMenu")),
+      catchError(this.handleError<Menu>("deleteMenu")),
     );
+  }
+
+  // search for a menu in the server
+  searchMenu(term: string): Observable<Menu[]> {
+    // searching without entering anything
+    if (!term.trim()) {
+      // create Observable with an empty array 
+      return of([]);
+    } else {
+      return this.http.get<Menu[]>(`${this.menusURL}/?name=${term}`).pipe(
+        // check if term actually exists
+        tap(x => x.length ? this.logMessage(`found menus with "${term}`) : this.logMessage(`no menus found with "${term}"`)),
+        catchError(this.handleError<Menu[]>("searchMenu")),
+      )
+    }
   }
 
 }

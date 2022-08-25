@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { MenuSearchComponent } from './menu-search/menu-search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InMemoryDataService } from './in-memory-data.service';
     MenusComponent,
     MenuDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    MenuSearchComponent
   ],
   imports: [
     BrowserModule,

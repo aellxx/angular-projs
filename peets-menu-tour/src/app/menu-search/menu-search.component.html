@@ -1,0 +1,13 @@
+<div #searchComponent>
+    <!-- search box -->
+    <label for="search-box">Search for a menu: </label>
+    <input #searchBox id="search-box" type="text" (input)="searchOnInput(searchBox.value)">
+    <!-- search result display -->
+    <ul class="search-result">
+        <li *ngFor="let menu of searchedMenus$ | async">
+            <a routerLink="details/{{menu.id}}">
+                {{ menu.name }}
+            </a>
+        </li>
+    </ul>
+</div>
