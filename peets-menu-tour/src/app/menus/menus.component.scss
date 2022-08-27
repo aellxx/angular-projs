@@ -15,7 +15,6 @@ ul {
         /* flex */
         display: flex;
         align-items: center;
-        justify-content: center;
         flex-wrap: wrap;
         /* link design */
         a {
@@ -48,4 +47,19 @@ ul {
 
 h2 {
     text-align: center;
+}
+
+.newMenu {
+    .newMenuContent {
+        .inputField {
+            margin-bottom: 1rem;
+            label {
+                text-align: center;
+            }
+        }
+        button {
+            text-align: center;
+        }
+    }
+
 }
