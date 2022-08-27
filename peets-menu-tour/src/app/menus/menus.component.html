@@ -1,18 +1,22 @@
 <h2>Menus</h2>
-<ul class="menus">
-    <li *ngFor="let menu of menus">
-        <a routerLink="/details/{{menu.id}}">
-            {{ menu.name }}
-        </a>
-        <button type="button"
-         (click)="deleteMenuOnClick(menu.id)"
-         class="delete"
-         title="delete hero">
-            X
-        </button>
-    </li>
-</ul>
+<div class="menus">
+    <ul>
+        <li *ngFor="let menu of menus">
+            <a routerLink="/details/{{menu.id}}">
+                {{ menu.name }}
+            </a>
+            <button type="button"
+             (click)="deleteMenuOnClick(menu.id)"
+             class="delete"
+             title="delete hero">
+                X
+            </button>
+        </li>
+    </ul>
+</div>
+
 <div class="newMenu">
+    <h2>Add a new menu!</h2>
     <!-- name -->
     <label for="menuName">Menu: </label>
     <input type="text" #menuName placeholder="Enter a menu you want to add" required>

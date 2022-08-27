@@ -1,14 +1,22 @@
 @import "_variables";
+* {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
 
 ul {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid; 
+    justify-self: center;
+    grid-template-columns: repeat(auto-fill, 400px);
+    padding: 0;
     li {
         list-style: none;
         /* flex */
         display: flex;
-        flex-direction: column; 
         align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
         /* link design */
         a {
             background-color: #eee;
@@ -38,3 +46,6 @@ ul {
     }
 }
 
+h2 {
+    text-align: center;
+}

@@ -31,7 +31,7 @@ export class MenuSearchComponent implements OnInit {
       debounceTime(300),
       // ignore new term if same as before
       distinctUntilChanged(),
-      // switch to new search observable each time the term changes
+      // returns a new observable by taking @term and pushing it throgh the searchMenu function 
       switchMap((term: string) => this.menuService.searchMenu(term)),
     )
   }

@@ -1,7 +1,12 @@
-<div #searchComponent>
-    <!-- search box -->
-    <label for="search-box">Search for a menu: </label>
-    <input #searchBox id="search-box" type="text" (input)="searchOnInput(searchBox.value)">
+<div #searchComponent id="searchComponent">
+    <div id="fixedComponent">
+        <h2>Search</h2>
+        <div id="searchBox">
+            <!-- search box -->
+            <label for="search-box">Search for a menu: </label>
+            <input #searchBox id="search-box" type="text" (input)="searchOnInput(searchBox.value)">
+        </div>
+    </div>
     <!-- search result display -->
     <ul class="search-result">
         <li *ngFor="let menu of searchedMenus$ | async">
